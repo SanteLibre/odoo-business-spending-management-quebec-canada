@@ -18,6 +18,11 @@ class TipFeesManagement(models.Model):
     total_amount_with_tip = fields.Float("Total with tip", readonly=True, compute='_compute_amount',
                                          digits=dp.get_precision('Product Price'))
 
+    total_amount_with_tip_company = fields.Monetary("Total with tip (Company Currency)",
+                                                    compute='_compute_total_amount_company',
+                                                    store=True, currency_field='company_currency_id',
+                                                    digits=dp.get_precision('Account'))
+
     total_amount_with_tip_entry = fields.Float("Total with tip entry", readonly=True, required=False,
                                                states={'draft': [('readonly', False)],
                                                        'reported': [('readonly', False)],
@@ -54,9 +59,31 @@ class TipFeesManagement(models.Model):
 
     @api.depends('quantity', 'unit_amount', 'tax_ids', 'currency_id', 'tip', 'total_amount_with_tip_entry')
     def _compute_amount(self):
+        super(TipFeesManagement, self)._compute_amount()
         for expense in self:
-            expense.untaxed_amount = expense.unit_amount * expense.quantity
-            taxes = expense.tax_ids.compute_all(expense.unit_amount, expense.currency_id, expense.quantity,
-                                                expense.product_id, expense.employee_id.user_id.partner_id)
-            expense.total_amount = taxes.get('total_included')
             expense.total_amount_with_tip = expense.total_amount + expense.tip
+
+    @api.depends('date', 'total_amount', 'company_currency_id', 'tip', 'total_amount_with_tip_entry')
+    def _compute_total_amount_company(self):
+        super(TipFeesManagement, self)._compute_total_amount_company()
+        for expense in self:
+            amount_with_tip = 0
+            if expense.company_currency_id:
+                date_expense = expense.date
+                amount_with_tip = expense.currency_id._convert(
+                    expense.total_amount_with_tip, expense.company_currency_id,
+                    expense.company_id, date_expense or fields.Date.today())
+            expense.total_amount_with_tip_company = amount_with_tip
+
+
+class TipFeesManagementSheet(models.Model):
+    _inherit = "hr.expense.sheet"
+
+    total_amount_with_tip = fields.Monetary("Total with tip", compute='_compute_amount_with_tip', store=True,
+                                            currency_field='currency_id',
+                                            digits=dp.get_precision('Account'))
+
+    @api.depends('expense_line_ids.total_amount_with_tip_company')
+    def _compute_amount_with_tip(self):
+        for sheet in self:
+            sheet.total_amount_with_tip = sum(sheet.expense_line_ids.mapped('total_amount_with_tip_company'))

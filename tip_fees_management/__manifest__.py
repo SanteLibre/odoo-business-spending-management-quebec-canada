@@ -15,6 +15,7 @@ TODO
     'depends': ['hr_expense'],
     'data': [
         'views/tip_fees_management_view.xml',
+        'views/hr_expense_views.xml',
     ],
     'installable': True,
 }
