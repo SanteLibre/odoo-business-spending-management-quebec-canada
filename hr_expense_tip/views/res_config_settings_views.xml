@@ -14,10 +14,10 @@
                             <div class="col-12 col-lg-6 o_setting_box"
                                  title="When you wish to include the tip by default to the employee reimbursement.">
                                 <div class="o_setting_left_pane">
-                                    <field name="refund_total_amount_with_tip_to_employee"/>
+                                    <field name="refund_total_amount_tip_included_to_employee"/>
                                 </div>
                                 <div class="o_setting_right_pane">
-                                    <label string="Refund tip" for="refund_total_amount_with_tip_to_employee"/>
+                                    <label string="Refund tip" for="refund_total_amount_tip_included_to_employee"/>
                                     <div class="text-muted">
                                         Refund the employee including tip
                                     </div>
