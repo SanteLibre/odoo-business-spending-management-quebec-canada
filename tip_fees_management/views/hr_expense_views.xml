@@ -18,6 +18,16 @@
                 <field name="total_amount_with_tip" nolabel="1" class="oe_subtotal_footer_separator"/>
             </xpath>
 
+            <xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']"
+                   position="replace">
+                <field name="default_amount" invisible="1"/>
+                <button name="%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d" type="action"
+                        string="Register Payment" class="oe_highlight o_expense_sheet_pay"
+                        attrs="{'invisible': [('state', '!=', 'post')]}"
+                        context="{'default_amount': default_amount, 'partner_id': address_id}"
+                        groups="account.group_account_manager"/>
+            </xpath>
+
         </field>
     </record>
 
