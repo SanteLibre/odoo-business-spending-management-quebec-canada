@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 {
-    'name': 'Tip fees hr expense quebec canada',
-    'version': '0.1',
+    'name': 'HR expense tip included',
+    'version': '1.0.0',
+    'author': "MathBenTech",
+    'website': 'https://mathben.tech',
+    'license': 'AGPL-3',
     'category': 'Human Resources',
+    'summary': 'Support tip in hr_expense',
     'description': """
-Implement tips in hr expense for human resources
-================================================
-
-TODO
+Support tip in module hr_expense
+=================================
+Add tip in expense.
+Support refund tip to employee, see configuration.
 """,
     'depends': ['hr_expense'],
     'data': [
