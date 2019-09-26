@@ -14,9 +14,14 @@
             <xpath expr="//field[@name='total_amount']" position="after">
                 <field name="total_amount_with_tip" required="0" widget="monetary"
                        options="{'currency_field': 'currency_id'}"/>
-                <field name="total_amount_with_tip_entry" required="0" widget="monetary"
-                       options="{'currency_field': 'currency_id'}"/>
                 <field name="unit_amount_compute" attrs="{'invisible':1}"/>
+            </xpath>
+
+            <xpath expr="//group" position="after">
+                <group class="oe_edit_only">
+                    <field name="total_amount_with_tip_entry" required="0" widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
+                </group>
             </xpath>
 
         </field>
