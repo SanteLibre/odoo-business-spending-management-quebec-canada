@@ -33,8 +33,9 @@ class HrExpenseTip(models.Model):
     @api.depends('quantity', 'unit_amount', 'tax_ids', 'currency_id', 'tip', 'total_amount_tip_included_entry')
     def _compute_unit_amount_compute(self):
         for expense in self:
-            # Don't compute if missing total_amount_tip_included_entry
-            if not expense.total_amount_tip_included_entry:
+            # Don't compute if missing total_amount_tip_included_entry or when missing product
+            # when choosing product, it overwrite price
+            if not expense.total_amount_tip_included_entry or not expense.product_id:
                 continue
 
             if not expense.unit_amount and expense.tip:

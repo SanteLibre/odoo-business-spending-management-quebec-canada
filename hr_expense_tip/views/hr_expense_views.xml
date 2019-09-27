@@ -18,7 +18,7 @@
             </xpath>
 
             <xpath expr="//group" position="after">
-                <group class="oe_edit_only">
+                <group class="oe_edit_only" attrs="{'invisible': [('product_id', '=', False)]}">
                     <field name="total_amount_tip_included_entry" required="0" widget="monetary"
                            options="{'currency_field': 'currency_id'}"/>
                 </group>
