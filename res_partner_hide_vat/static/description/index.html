@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>HR Expense TIP</title>
+  <title>Res. Partner hide VAT</title>
   <style type="text/css">
 
     /*
@@ -467,11 +467,10 @@
   <p>
     <a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png"/></a>
   </p>
-  <p>This module tip in expense and enable the refund to the employee including tip.</p>
+  <p>Some countries, provinces, states doesn't use VAT, it is on a need to know basis only.</p>
   <p><strong>Table of contents</strong></p>
   <div class="contents local topic" id="contents">
     <ul class="simple">
-      <li><a class="reference internal" href="#usage" id="id1">Usage</a></li>
       <li><a class="reference internal" href="#bug-tracker" id="id2">Bug Tracker</a></li>
       <li><a class="reference internal" href="#credits" id="id3">Credits</a>
         <ul>
@@ -482,100 +481,6 @@
     </ul>
   </div>
 
-  <div class="section" id="usage">
-    <h1><a class="toc-backref" href="#id1">Usage</a></h1>
-
-    <section class="oe_container">
-      <div class="oe_row">
-        <h2 class="oe_slogan">Configuration</h2>
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/config.png">
-        </div>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            To refund tip, enable «Refund tip» in settings panel in configuration menu.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="oe_container oe_dark">
-      <div class="oe_row">
-        <h2 class="oe_slogan">Add your tip when creating an expense sheet</h2>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            The "Total tip included entry" appears only when a product is chosen. This field enables automatically the tip calculation or the unit price calculation (1 unit) as soon as it is
-            completed. If you don't want to trigger this option, the field must remain 0.
-          </p>
-        </div>
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/form_entry_tip_edit.png">
-        </div>
-      </div>
-
-      <div class="oe_row">
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            The "Tip" and "Total tip included" are shown.
-          </p>
-        </div>
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/form_entry_tip.png">
-        </div>
-
-      </div>
-    </section>
-
-    <section class="oe_container">
-      <div class="oe_row">
-        <h2 class="oe_slogan">Refund the employee</h2>
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/expense_report_with_tip.png">
-        </div>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            The report shows the "Total tip included" as well as the total. The amount is shown in the currency set by default in your company settings.
-          </p>
-        </div>
-
-      </div>
-      <div class="oe_row">
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/journal_entry_and_payment.png">
-        </div>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            When accounting is activated with the "Show Full Accounting Features" option, it will be shown as an entry in the journal. Also the refund is shown as the employee becomes a
-            supplier.
-          </p>
-        </div>
-      </div>
-
-      <div class="oe_row">
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/bill_without_tip.png">
-        </div>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            The bill doesn't include tip.
-          </p>
-        </div>
-      </div>
-
-      <div class="oe_row">
-        <div class="oe_span6">
-          <img class="oe_picture oe_screenshot" src="img/refund_employee_with_tip.png">
-        </div>
-        <div class="oe_span6">
-          <p class='oe_mt32'>
-            The employee is refunded including the tip. This is optional.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
   <div class="section" id="bug-tracker">
     <h1><a class="toc-backref" href="#id2">Bug Tracker</a></h1>
     <p>Bugs are tracked on <a class="reference external" href="https://gitlab.com/mathbentech/odoo-business-spending-management-quebec-canada/issues">Gitlab Issues</a>.
