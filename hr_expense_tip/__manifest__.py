@@ -12,8 +12,7 @@
     'description': """
 Support tip in module hr_expense
 =================================
-Add tip in expense.
-Support refund tip to employee, see configuration.
+This module tip in expense and enable the refund to the employee including tip.
 """,
     'depends': ['hr_expense'],
     'data': [
