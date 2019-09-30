@@ -12,14 +12,14 @@
             </xpath>
 
             <xpath expr="//field[@name='total_amount']" position="after">
-                <field name="total_amount_tip_included" required="0" widget="monetary"
+                <field name="total_tip_amount_included" required="0" widget="monetary"
                        options="{'currency_field': 'currency_id'}"/>
                 <field name="unit_amount_compute" attrs="{'invisible':1}"/>
             </xpath>
 
             <xpath expr="//group" position="after">
                 <group class="oe_edit_only" attrs="{'invisible': [('product_id', '=', False)]}">
-                    <field name="total_amount_tip_included_entry" required="0" widget="monetary"
+                    <field name="total_tip_amount_included_entry" required="0" widget="monetary"
                            options="{'currency_field': 'currency_id'}"/>
                 </group>
             </xpath>
@@ -34,14 +34,14 @@
         <field name="arch" type="xml">
 
             <xpath expr="//tree/field[@name='total_amount']" position="after">
-                <field name="total_amount_tip_included"/>
+                <field name="total_tip_amount_included"/>
             </xpath>
 
             <xpath expr="//group[@name='expense_total']/field[@name='total_amount']" position="after">
                 <div class="oe_subtotal_footer_separator oe_inline o_td_label">
-                    <label for="total_amount_tip_included"/>
+                    <label for="total_tip_amount_included"/>
                 </div>
-                <field name="total_amount_tip_included" nolabel="1" class="oe_subtotal_footer_separator"/>
+                <field name="total_tip_amount_included" nolabel="1" class="oe_subtotal_footer_separator"/>
             </xpath>
 
             <xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']"

@@ -15,65 +15,66 @@ class HrExpenseTip(models.Model):
                        states={'draft': [('readonly', False)], 'reported': [('readonly', False)],
                                'refused': [('readonly', False)]}, digits=dp.get_precision('Product Price'))
 
-    total_amount_tip_included = fields.Float("Total tip included", readonly=True, compute='_compute_amount_tip',
+    total_tip_amount_included = fields.Float("Total tip included", readonly=True, compute='_compute_tip_amount',
                                              digits=dp.get_precision('Product Price'))
 
-    total_amount_tip_included_company = fields.Monetary("Total tip included (Company Currency)",
-                                                        compute='_compute_total_amount_tip_included_company',
+    total_tip_amount_included_company = fields.Monetary("Total tip included (Company Currency)",
+                                                        compute='_compute_total_tip_amount_included_company',
                                                         store=True, currency_field='company_currency_id',
                                                         digits=dp.get_precision('Account'))
 
-    total_amount_tip_included_entry = fields.Float("Total tip included entry", readonly=True, required=False,
+    total_tip_amount_included_entry = fields.Float("Total tip included entry", readonly=True, required=False,
                                                    states={'draft': [('readonly', False)],
                                                            'reported': [('readonly', False)],
                                                            'refused': [('readonly', False)]},
                                                    digits=dp.get_precision('Product Price'),
                                                    help="Enter your total tip included to compute tip automatic.")
 
-    @api.depends('quantity', 'unit_amount', 'tax_ids', 'currency_id', 'tip', 'total_amount_tip_included_entry')
+    @api.depends('quantity', 'unit_amount', 'tax_ids', 'currency_id', 'tip', 'total_tip_amount_included_entry')
     def _compute_unit_amount_compute(self):
         for expense in self:
-            # Don't compute if missing total_amount_tip_included_entry or when missing product
+            # Must not compute if missing total_tip_amount_included_entry or when missing product
             # when choosing product, it overwrite price
-            if not expense.total_amount_tip_included_entry or not expense.product_id:
+            if not expense.total_tip_amount_included_entry or not expense.product_id:
                 continue
 
             if not expense.unit_amount and expense.tip:
-                # Sequence (tax,total_amount_tip_included_entry,tip)
-                # Support unit amount without taxes! Recompute when taxes is chosen
+                # Sequence (tax,total_tip_amount_included_entry,tip)
+                # Support unit amount without taxes. Recompute when taxes is chosen
                 expense.unit_amount_compute = expense.tip
-                subtotal = expense.total_amount_tip_included_entry - expense.tip
+                total = expense.total_tip_amount_included_entry - expense.tip
 
-                # Find the magic number of taxes
+                # To find the unit_amount, calculate the reversed taxes and subtract from total
+                # The bigger the magic number the more precision you get
                 magic_number = 1000000
                 taxes = expense.tax_ids.compute_all(magic_number, None, 1.0, expense.product_id,
                                                     expense.employee_id.user_id.partner_id)
-                calculated_magic_taxes = taxes.get("total_included", 1.) / magic_number
+                calculate_reverse_taxes = taxes.get("total_included", 1.) / magic_number
 
-                expense.unit_amount = subtotal / calculated_magic_taxes
+                expense.unit_amount = total / calculate_reverse_taxes
             elif not expense.unit_amount and not expense.tip:
-                # Sequence (total_amount_tip_included_entry,tax or no tax)
+                # Sequence (total_tip_amount_included_entry,tax or no tax)
                 # Nothing to compute with only one number
                 continue
             elif not expense.tip and expense.unit_amount:
-                # Sequence (total_amount_tip_included_entry,(tax,unit_amount|unit_amount,tax))
-                expense.tip = expense.total_amount_tip_included_entry - expense.total_amount
+                # Sequence (total_tip_amount_included_entry,(tax,unit_amount|unit_amount,tax))
+                expense.tip = expense.total_tip_amount_included_entry - expense.total_amount
 
-    @api.depends('total_amount', 'tip', 'total_amount_tip_included_entry')
-    def _compute_amount_tip(self):
+    @api.depends('total_amount', 'tip', 'total_tip_amount_included_entry')
+    def _compute_tip_amount(self):
         for expense in self:
-            expense.total_amount_tip_included = expense.total_amount + expense.tip
+            expense.total_tip_amount_included = expense.total_amount + expense.tip
 
-    @api.depends('date', 'total_amount', 'company_currency_id', 'tip', 'total_amount_tip_included_entry')
-    def _compute_total_amount_tip_included_company(self):
+    @api.depends('date', 'total_amount', 'company_currency_id', 'tip', 'total_tip_amount_included_entry')
+    def _compute_total_tip_amount_included_company(self):
         for expense in self:
-            amount_tip_included = 0
+            tip_amount_included = 0
             if expense.company_currency_id:
                 date_expense = expense.date
-                amount_tip_included = expense.currency_id._convert(
-                    expense.total_amount_tip_included, expense.company_currency_id,
+                tip_amount_included = expense.currency_id._convert(
+                    expense.total_tip_amount_included, expense.company_currency_id,
                     expense.company_id, date_expense or fields.Date.today())
-            expense.total_amount_tip_included_company = amount_tip_included
+            expense.total_tip_amount_included_company = tip_amount_included
 
 
 class HrExpenseTipSheet(models.Model):
@@ -84,23 +85,23 @@ class HrExpenseTipSheet(models.Model):
                                      currency_field='currency_id',
                                      digits=dp.get_precision('Account'))
 
-    total_amount_tip_included = fields.Monetary("Total tip included", compute='_compute_amount_tip_included',
+    total_tip_amount_included = fields.Monetary("Total tip included", compute='_compute_tip_amount_included',
                                                 store=True,
                                                 currency_field='currency_id',
                                                 digits=dp.get_precision('Account'))
 
-    @api.depends('expense_line_ids.total_amount', 'expense_line_ids.total_amount_tip_included_company')
+    @api.depends('expense_line_ids.total_amount', 'expense_line_ids.total_tip_amount_included_company')
     def _compute_default_amount(self):
-        refund_total_amount_tip_included_to_employee = self.env['ir.config_parameter'].sudo().get_param(
-            'hr_expense.refund_total_amount_tip_included_to_employee')
+        refund_total_tip_amount_included_to_employee = self.env['ir.config_parameter'].sudo().get_param(
+            'hr_expense.refund_total_tip_amount_included_to_employee')
 
         for sheet in self:
-            if refund_total_amount_tip_included_to_employee:
-                sheet.default_amount = sheet.total_amount_tip_included
+            if refund_total_tip_amount_included_to_employee:
+                sheet.default_amount = sheet.total_tip_amount_included
             else:
                 sheet.default_amount = sheet.total_amount
 
-    @api.depends('expense_line_ids.total_amount_tip_included_company')
-    def _compute_amount_tip_included(self):
+    @api.depends('expense_line_ids.total_tip_amount_included_company')
+    def _compute_tip_amount_included(self):
         for sheet in self:
-            sheet.total_amount_tip_included = sum(sheet.expense_line_ids.mapped('total_amount_tip_included_company'))
+            sheet.total_tip_amount_included = sum(sheet.expense_line_ids.mapped('total_tip_amount_included_company'))

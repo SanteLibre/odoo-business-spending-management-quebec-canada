@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-26 21:12+0000\n"
-"PO-Revision-Date: 2019-09-26 21:12+0000\n"
+"POT-Creation-Date: 2019-09-30 17:38+0000\n"
+"PO-Revision-Date: 2019-09-30 17:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: hr_expense_tip
-#: model:ir.model.fields,field_description:hr_expense_tip.field_res_config_settings__refund_total_amount_tip_included_to_employee
+#: model:ir.model.fields,field_description:hr_expense_tip.field_res_config_settings__refund_total_tip_amount_included_to_employee
 msgid "Add tip when refund employee the expense."
 msgstr ""
 
@@ -31,7 +31,7 @@ msgid "Default amount when register payment"
 msgstr ""
 
 #. module: hr_expense_tip
-#: model:ir.model.fields,help:hr_expense_tip.field_hr_expense__total_amount_tip_included_entry
+#: model:ir.model.fields,help:hr_expense_tip.field_hr_expense__total_tip_amount_included_entry
 msgid "Enter your total tip included to compute tip automatic."
 msgstr ""
 
@@ -52,7 +52,7 @@ msgstr ""
 
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.res_config_settings_view_form
-msgid "Refund the employee including tip"
+msgid "Refund the employee including the tip paid"
 msgstr ""
 
 #. module: hr_expense_tip
@@ -72,18 +72,18 @@ msgid "Tip"
 msgstr ""
 
 #. module: hr_expense_tip
-#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_amount_tip_included
-#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense_sheet__total_amount_tip_included
+#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included
+#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense_sheet__total_tip_amount_included
 msgid "Total tip included"
 msgstr ""
 
 #. module: hr_expense_tip
-#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_amount_tip_included_company
+#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included_company
 msgid "Total tip included (Company Currency)"
 msgstr ""
 
 #. module: hr_expense_tip
-#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_amount_tip_included_entry
+#: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included_entry
 msgid "Total tip included entry"
 msgstr ""
 
@@ -94,6 +94,6 @@ msgstr ""
 
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.res_config_settings_view_form
-msgid "When you wish to include the tip by default to the employee reimbursement."
+msgid "When you wish to include by default the tip amount paid by the employee in the reimbursement."
 msgstr ""
 
