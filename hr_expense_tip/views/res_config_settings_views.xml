@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.hr.expense.tip</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Expenses" string="Expenses" data-key="hr_expense"
+                         groups="hr_expense.group_hr_expense_manager">
+                        <h2>Tip</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 title="When you wish to include by default the tip amount paid by the employee in the reimbursement.">
+                                <div class="o_setting_left_pane">
+                                    <field name="refund_total_tip_amount_included_to_employee"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string="Refund tip" for="refund_total_tip_amount_included_to_employee"/>
+                                    <div class="text-muted">
+                                        Refund the employee including the tip paid
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
