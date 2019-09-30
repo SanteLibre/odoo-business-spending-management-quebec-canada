@@ -1,29 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* hr_expense_tip
+# 	* hr_expense_tip
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 17:38+0000\n"
-"PO-Revision-Date: 2019-09-30 17:38+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2019-09-30 14:49-0400\n"
+"Last-Translator: Marie-Michèle Poulin <marie-michele.poulin@mathben.tech>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: fr_CA\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_res_config_settings__refund_total_tip_amount_included_to_employee
-msgid "Add tip when refund employee the expense."
-msgstr ""
+msgid "Add tip when refunding the employee expenses."
+msgstr "Ajouter le pourboire payé lors du remboursement de l'employé."
 
 #. module: hr_expense_tip
 #: model:ir.model,name:hr_expense_tip.model_res_config_settings
 msgid "Config Settings"
-msgstr "Paramètres de config"
+msgstr "Paramètres de configuration"
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense_sheet__default_amount
@@ -33,12 +35,12 @@ msgstr "Montant par défaut au moment d'enregistrer un paiement"
 #. module: hr_expense_tip
 #: model:ir.model.fields,help:hr_expense_tip.field_hr_expense__total_tip_amount_included_entry
 msgid "Enter your total tip included to compute tip automatic."
-msgstr ""
+msgstr "Entrer le montant total avec le pourboire inclus pour calculer le montant du pourboire automatiquement"
 
 #. module: hr_expense_tip
 #: model:ir.model,name:hr_expense_tip.model_hr_expense
 msgid "Expense"
-msgstr "Dépense"
+msgstr "Frais"
 
 #. module: hr_expense_tip
 #: model:ir.model,name:hr_expense_tip.model_hr_expense_sheet
@@ -53,12 +55,12 @@ msgstr "Frais"
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.res_config_settings_view_form
 msgid "Refund the employee including the tip paid"
-msgstr ""
+msgstr "Rembourser l'employé en incluant le montant de pourboire payé"
 
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.res_config_settings_view_form
 msgid "Refund tip"
-msgstr ""
+msgstr "Rembourser le pourboire"
 
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.view_hr_expense_sheet_form
@@ -75,25 +77,24 @@ msgstr "Pourboire"
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense_sheet__total_tip_amount_included
 msgid "Total tip included"
-msgstr ""
+msgstr "Total incluant le pourboire"
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included_company
 msgid "Total tip included (Company Currency)"
-msgstr ""
+msgstr "Total incluant le pourboire (Selon la devise désignée par défaut de la compagnie"
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__total_tip_amount_included_entry
 msgid "Total tip included entry"
-msgstr ""
+msgstr "Entrer le montant total incluant le pourboire"
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_hr_expense__unit_amount_compute
 msgid "Unit Price Compute"
-msgstr ""
+msgstr "Prix unitaire calculé"
 
 #. module: hr_expense_tip
 #: model_terms:ir.ui.view,arch_db:hr_expense_tip.res_config_settings_view_form
 msgid "When you wish to include by default the tip amount paid by the employee in the reimbursement."
-msgstr ""
-
+msgstr "Pour inclure le pourboire dans le remboursement de l'employé par défaut."

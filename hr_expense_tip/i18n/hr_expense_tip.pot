@@ -17,7 +17,7 @@ msgstr ""
 
 #. module: hr_expense_tip
 #: model:ir.model.fields,field_description:hr_expense_tip.field_res_config_settings__refund_total_tip_amount_included_to_employee
-msgid "Add tip when refund employee the expense."
+msgid "Add tip when refunding the employee expenses."
 msgstr ""
 
 #. module: hr_expense_tip
