@@ -12,9 +12,9 @@
     'description': """
 Hide VAT
 ========
-Some country, provinces or state doesn't need VAT, so ignore it.
+Some countries, provinces, states doesn't use VAT, it is on a need to know basis only.
 """,
-    'depends': ['base'],
+    'depends': ['base', 'contacts'],
     'data': [
         'views/res_company_views.xml',
         'views/res_partner_views.xml',
