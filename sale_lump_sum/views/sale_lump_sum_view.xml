@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="sale_lump_sum">
+        <field name="name">sale.order.lump.sum.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="lump_sum" groups="base.group_user"/>
+                <field name="lump_sum_entry" groups="base.group_user"
+                       attrs="{'invisible': [('lump_sum', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
