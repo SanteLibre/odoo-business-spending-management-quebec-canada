@@ -14,8 +14,8 @@ def post_init_hook(cr, e):
 
         # Update all partner
         partners = env['res.partner'].search([('tz', '=', False), ('active', '=', True)])
-        if partners:
-            partners.tz = default_tz
+        for partner in partners:
+            partner.tz = default_tz
 
         # Update default tz
         field = env['ir.model.fields'].search([('name', '=', 'tz'), ('model', '=', 'res.users')])
