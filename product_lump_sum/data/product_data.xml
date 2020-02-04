@@ -9,6 +9,7 @@
         <record id="expense_product" model="product.product">
             <field name="name">Lump sum</field>
             <field name="type">service</field>
+            <field name="list_price" eval="0"/>
             <field name="categ_id" ref="product_lump_sum.cat_lump_sum"/>
         </record>
 

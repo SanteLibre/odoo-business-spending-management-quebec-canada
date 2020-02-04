@@ -74,7 +74,7 @@ class SaleOrder(models.Model):
 
         def _add_line_product(i, line, product_id):
             product = self.env['product.product'].browse(product_id)
-            if product.categ_id.name == cst_lump_sump:
+            if product.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
                 lst_lump_sump.append([line, product, i])
             elif product.type == "service":
                 lst_service.append([line, product, i])
@@ -147,7 +147,7 @@ class SaleOrder(models.Model):
                     # detect if product has changed
                     product_id = line[2].get("product_id")
                     _add_line_product(i, line, product_id)
-                elif order_line.product_id.categ_id.name == cst_lump_sump:
+                elif order_line.product_id.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
                     lst_lump_sump.append([line, order_line, i])
                 elif order_line.product_id.type == "service":
                     lst_service.append([line, order_line, i])
