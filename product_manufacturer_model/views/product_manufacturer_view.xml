@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="product_template_manufacturer_model_form_view" model="ir.ui.view">
+        <field name="name">product.template.form - product_manufacturer_model</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']/group[@name='manufacturer']/group/field[@name='manufacturer_pname']" position="after">
+                <field name="manufacturer_model"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

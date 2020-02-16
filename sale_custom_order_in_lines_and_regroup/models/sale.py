@@ -3,6 +3,8 @@
 
 from odoo import _, fields, api, models
 
+cst_lump_sump = "Lump sum"
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -54,6 +56,7 @@ class SaleOrder(models.Model):
         find_label_material = False
         find_label_service = False
         lst_order_line = []
+        lst_lump_sump = []
         lst_service = []
         lst_product = []
         lst_other = []
@@ -71,7 +74,9 @@ class SaleOrder(models.Model):
 
         def _add_line_product(i, line, product_id):
             product = self.env['product.product'].browse(product_id)
-            if product.type == "service":
+            if product.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
+                lst_lump_sump.append([line, product, i])
+            elif product.type == "service":
                 lst_service.append([line, product, i])
             elif product.type == "consu" or product.type == "product":
                 lst_product.append([line, product, i])
@@ -142,6 +147,8 @@ class SaleOrder(models.Model):
                     # detect if product has changed
                     product_id = line[2].get("product_id")
                     _add_line_product(i, line, product_id)
+                elif order_line.product_id.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
+                    lst_lump_sump.append([line, order_line, i])
                 elif order_line.product_id.type == "service":
                     lst_service.append([line, order_line, i])
                 elif order_line.product_id.type == "consu" or order_line.product_id.type == "product":
@@ -173,11 +180,16 @@ class SaleOrder(models.Model):
                         lst_other.append([line, False, i])
 
         # Create label
-        new_sequence_index = 10
+        new_sequence_index = 9
 
         # Create new list with ordered items
+        # Lump sump section
+        for line in lst_lump_sump:
+            new_sequence_index = _add_order_line(line, new_sequence_index)
+
         # Material section
         if not find_label_material:
+            new_sequence_index += 1
             dct_line_section = {"name": self.get_material_name(), "display_type": "line_section",
                                 "sequence": new_sequence_index}
             item_line_section = [0, "virtual_112", dct_line_section]

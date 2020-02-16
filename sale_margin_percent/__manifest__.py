@@ -12,6 +12,6 @@ This module adds the 'Margin Percent' on sales order.
 This gives the profitability by calculating the difference between the Unit
 Price and Cost Price.
     """,
-    'depends': ['sale_management', 'sale_margin'],
+    'depends': ['sale', 'sale_management', 'sale_margin'],
     'data': ['views/sale_margin_view.xml'],
 }

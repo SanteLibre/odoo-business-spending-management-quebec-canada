@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_manufacturer_model
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-08 00:34+0000\n"
+"PO-Revision-Date: 2019-11-08 00:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_manufacturer_model
+#: model:ir.model.fields,field_description:product_manufacturer_model.field_product_product__manufacturer_model
+#: model:ir.model.fields,field_description:product_manufacturer_model.field_product_template__manufacturer_model
+msgid "Manuf. Product Model"
+msgstr ""
+
+#. module: product_manufacturer_model
+#: model:ir.model,name:product_manufacturer_model.model_product_template
+msgid "Product Template"
+msgstr ""
+
