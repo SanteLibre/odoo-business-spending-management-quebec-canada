@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="sale_hide_tax_sale_order_line_form">
+            <field name="name">sale.order.line.tree.hide_tax.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='order_line']" position="before">
+                    <group>
+                        <field name="hide_tax_sale_order"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="attributes">
+                    <attribute name="attrs">{'column_invisible': [('parent.hide_tax_sale_order', '=', True)]}
+                    </attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
