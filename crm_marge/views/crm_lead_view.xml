@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="quick_create_marge_opportunity_form" model="ir.ui.view">
+        <field name="name">crm.lead.form.marge.quick_create</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="marge"/>
+                <field name="marge_percent"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_marge_kanban_view_leads" model="ir.ui.view">
+        <field name="name">crm.lead.marge.kanban.lead</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="marge"/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('o_kanban_record_subtitle')]" position="after">
+                <div class="text-muted o_kanban_record_subtitle">
+                    <t t-if="record.marge.raw_value">Marge:
+                        <field name="marge" widget="monetary"
+                               options="{'currency_field': 'company_currency'}"/>
+                        <span class="oe_grey">at</span>
+                        <field name="marge_percent"/>
+                        <span class="oe_grey">%%</span>
+                    </t>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="crm_marge_case_form_view_oppor" model="ir.ui.view">
+        <field name="name">crm.lead.form.marge.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']/../../.." position="after">
+                <h2 class="o_row row no-gutters d-flex">
+                    <div class="col">
+                        Marge
+                    </div>
+                    <div class="col">
+                        <label for="marge" class="oe_edit_only"/>
+                        <div class="o_row">
+                            <field name="company_currency" invisible="1"/>
+                            <field name="marge" class="oe_inline" widget='monetary'
+                                   options="{'currency_field': 'company_currency'}"/>
+                            <span class="oe_grey">at</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="marge_percent" class="oe_edit_only"/>
+                        <div class="o_row d-flex">
+                            <field name="marge_percent" class="oe_inline"/>
+                            <span class="oe_grey">%%</span>
+                        </div>
+                    </div>
+                </h2>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_marge_view_pivot" model="ir.ui.view">
+        <field name="name">crm.lead.marge.view.pivot</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="marge" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_create_opportunity_marge_simplified" model="ir.ui.view">
+        <field name="name">crm.lead.marge.form.simple</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']/.." position="after">
+                <div class="o_row">
+                    <field name="marge"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_marge_tree_view_oppor" model="ir.ui.view">
+        <field name="name">crm.lead.marge.tree.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="marge" sum="Expected Marges"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_marge_view_tree_activity" model="ir.ui.view">
+        <field name="name">crm.lead.marge.tree.opportunity.next.activity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_tree_activity"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="marge"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
