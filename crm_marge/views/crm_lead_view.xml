@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="quick_create_gross_margin_opportunity_form" model="ir.ui.view">
+        <field name="name">crm.lead.form.gross_margin.quick_create</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="cost"/>
+                <field name="gross_margin"/>
+                <field name="gross_margin_percent"/>
+                <field name="markup_percent"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_gross_margin_kanban_view_leads" model="ir.ui.view">
+        <field name="name">crm.lead.gross_margin.kanban.lead</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="cost"/>
+                <field name="gross_margin"/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('o_kanban_record_subtitle')]" position="after">
+                <div class="text-muted o_kanban_record_subtitle">
+                    <t t-if="record.cost.raw_value">Cost:
+                        <field name="cost" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                    </t>
+                    <t t-if="record.gross_margin.raw_value">
+                        <t t-if="record.cost.raw_value">
+                            <br/>
+                        </t>
+                        Gross Margin:
+                        <field name="gross_margin" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <span class="oe_grey">at</span>
+                        <field name="gross_margin_percent"/>
+                        <span class="oe_grey">%%</span>
+                    </t>
+                    <t t-if="record.markup_percent.raw_value">
+                        <t t-if="record.cost.raw_value || record.gross_margin.raw_value">
+                            <br/>
+                        </t>
+                        Markup:
+                        <field name="markup_percent"/>
+                        <span class="oe_grey">%%</span>
+                    </t>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="crm_gross_margin_case_form_view_oppor" model="ir.ui.view">
+        <field name="name">crm.lead.form.gross_margin.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']/../../.." position="after">
+                <h2 class="o_row row no-gutters d-flex">
+                    <div class="col">
+                        Cost
+                    </div>
+                    <div class="col">
+                        <label for="cost" class="oe_edit_only"/>
+                        <div class="o_row">
+                            <field name="company_currency" invisible="1"/>
+                            <field name="cost" class="oe_inline" widget='monetary'
+                                   options="{'currency_field': 'company_currency'}"/>
+                            <span class="oe_grey">at</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="markup_percent" class="oe_edit_only"/>
+                        <div class="o_row d-flex">
+                            <field name="markup_percent" class="oe_inline"/>
+                            <span class="oe_grey">%%</span>
+                        </div>
+                    </div>
+                </h2>
+                <h2 class="o_row row no-gutters d-flex">
+                    <div class="col">
+                        Marge
+                    </div>
+
+                    <div class="col">
+                        <label for="gross_margin" class="oe_edit_only"/>
+                        <div class="o_row">
+                            <field name="company_currency" invisible="1"/>
+                            <field name="gross_margin" class="oe_inline" widget='monetary'
+                                   options="{'currency_field': 'company_currency'}"/>
+                            <span class="oe_grey">at</span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="gross_margin_percent" class="oe_edit_only"/>
+                        <div class="o_row d-flex">
+                            <field name="gross_margin_percent" class="oe_inline"/>
+                            <span class="oe_grey">%%</span>
+                        </div>
+                    </div>
+                </h2>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_gross_margin_view_pivot" model="ir.ui.view">
+        <field name="name">crm.lead.gross_margin.view.pivot</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="cost" type="measure"/>
+                <field name="gross_margin" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_create_opportunity_gross_margin_simplified" model="ir.ui.view">
+        <field name="name">crm.lead.gross_margin.form.simple</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']/.." position="after">
+                <div class="o_row">
+                    <field name="cost"/>
+                    <field name="gross_margin"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_gross_margin_tree_view_oppor" model="ir.ui.view">
+        <field name="name">crm.lead.gross_margin.tree.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="cost" sum="Expected Costs"/>
+                <field name="gross_margin" sum="Expected Marges"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_gross_margin_view_tree_activity" model="ir.ui.view">
+        <field name="name">crm.lead.gross_margin.tree.opportunity.next.activity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_tree_activity"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <field name="cost"/>
+                <field name="gross_margin"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
