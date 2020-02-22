@@ -23,8 +23,8 @@ class Lead(models.Model):
                 # Need to support the same day
                 if lead.start_date > lead.due_date:
                     warning = {
-                        'title': "Warning date error",
-                        'message': "The due date is before the start date.",
+                        'title': _("Warning date error"),
+                        'message': _("The due date is before the start date."),
                     }
 
             if warning:
