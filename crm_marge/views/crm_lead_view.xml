@@ -30,11 +30,21 @@
                     <t t-if="record.cost.raw_value">Cost:
                         <field name="cost" widget="monetary" options="{'currency_field': 'company_currency'}"/>
                     </t>
-                    <t t-if="record.gross_margin.raw_value">Marge:
+                    <t t-if="record.gross_margin.raw_value">
+                        <t t-if="record.cost.raw_value">
+                            <br/>
+                        </t>
+                        Gross Margin:
                         <field name="gross_margin" widget="monetary" options="{'currency_field': 'company_currency'}"/>
                         <span class="oe_grey">at</span>
                         <field name="gross_margin_percent"/>
-                        <span class="oe_grey">at</span>
+                        <span class="oe_grey">%%</span>
+                    </t>
+                    <t t-if="record.markup_percent.raw_value">
+                        <t t-if="record.cost.raw_value || record.gross_margin.raw_value">
+                            <br/>
+                        </t>
+                        Markup:
                         <field name="markup_percent"/>
                         <span class="oe_grey">%%</span>
                     </t>
@@ -60,6 +70,14 @@
                             <field name="company_currency" invisible="1"/>
                             <field name="cost" class="oe_inline" widget='monetary'
                                    options="{'currency_field': 'company_currency'}"/>
+                            <span class="oe_grey">at</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="markup_percent" class="oe_edit_only"/>
+                        <div class="o_row d-flex">
+                            <field name="markup_percent" class="oe_inline"/>
+                            <span class="oe_grey">%%</span>
                         </div>
                     </div>
                 </h2>
@@ -67,6 +85,7 @@
                     <div class="col">
                         Marge
                     </div>
+
                     <div class="col">
                         <label for="gross_margin" class="oe_edit_only"/>
                         <div class="o_row">
@@ -76,16 +95,11 @@
                             <span class="oe_grey">at</span>
                         </div>
                     </div>
+
                     <div class="col">
                         <label for="gross_margin_percent" class="oe_edit_only"/>
                         <div class="o_row d-flex">
                             <field name="gross_margin_percent" class="oe_inline"/>
-                            <span class="oe_grey">%%</span>
-                        </div>
-                        <span class="oe_grey">at</span>
-                        <label for="markup_percent" class="oe_edit_only"/>
-                        <div class="o_row d-flex">
-                            <field name="markup_percent" class="oe_inline"/>
                             <span class="oe_grey">%%</span>
                         </div>
                     </div>
