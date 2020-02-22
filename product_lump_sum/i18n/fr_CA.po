@@ -21,3 +21,13 @@ msgstr ""
 #: model:product.template,name:product_lump_sum.expense_product_product_template
 msgid "Lump sum"
 msgstr "Montant forfaitaire"
+
+#. module: product_lump_sum
+#: model:product.category,name:product_lump_sum.cat_lump_sum_product
+msgid "Lump sum product"
+msgstr "Montant forfaitaire produit"
+
+#. module: product_lump_sum
+#: model:product.category,name:product_lump_sum.cat_lump_sum_service
+msgid "Lump sum service"
+msgstr "Montant forfaitaire service"
