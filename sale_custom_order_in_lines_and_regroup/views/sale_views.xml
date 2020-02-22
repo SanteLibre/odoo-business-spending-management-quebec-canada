@@ -7,8 +7,8 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']" position="before">
-                    <group>
+                 <xpath expr="//group[@name='utm_link']" position="after">
+                    <group name="other_information" string="Other">
                         <field name="automatic_group_sale_order_at_save"/>
                     </group>
                 </xpath>
