@@ -9,34 +9,44 @@ class CrmMarge(models.Model):
     planned_revenue = fields.Monetary('Expected Revenue', currency_field='company_currency', track_visibility='always',
                                       readonly=True)
     cost = fields.Monetary(string="Cost", currency_field='company_currency')
-    marge = fields.Monetary(string="Marge", currency_field='company_currency')
-    marge_percent = fields.Float(string="Marge %")
+    gross_margin = fields.Monetary(string="Gross margin", currency_field='company_currency')
+    gross_margin_percent = fields.Float(string="Gross margin %")
+    markup_percent = fields.Float(string="Markup %", track_visibility='always',
+                             readonly=True)
 
     @api.multi
-    @api.onchange('marge', 'cost')
-    def onchange_marge(self):
+    @api.onchange('gross_margin', 'cost')
+    def onchange_gross_margin(self):
         """
-        Update marge_percent with marge
-        Influence marge_percent and planned_revenue
+        Update gross_margin_percent with gross_margin
+        Influence gross_margin_percent and planned_revenue
         """
         for lead in self:
-            lead.planned_revenue = lead.marge + lead.cost
+            lead.planned_revenue = lead.gross_margin + lead.cost
 
             if lead.planned_revenue:
-                lead.marge_percent = 100. * lead.marge / lead.planned_revenue
+                lead.gross_margin_percent = 100. * lead.gross_margin / lead.planned_revenue
+                if lead.cost != 0:
+                    lead.markup_percent = 100. * lead.gross_margin / lead.cost
             else:
-                lead.marge_percent = 0.
+                lead.gross_margin_percent = 0.
+                lead.markup_percent = 0.
+
+
 
     @api.multi
-    @api.onchange('marge_percent')
-    def onchange_marge_percent(self):
+    @api.onchange('gross_margin_percent')
+    def onchange_gross_margin_percent(self):
         """
-        Update marge with marge_percent
-        Influence marge and planned_revenue
+        Update gross_margin with gross_margin_percent
+        Influence gross_margin and planned_revenue
         """
         for lead in self:
-            if lead.marge_percent >= 100.:
-                lead.marge_percent = 99.999999
+            if lead.gross_margin_percent >= 100.:
+                lead.gross_margin_percent = 99.999999
 
-            lead.marge = (lead.cost / (1 - (lead.marge_percent / 100))) - lead.cost
-            lead.planned_revenue = lead.marge + lead.cost
+            lead.gross_margin = (lead.cost / (1 - (lead.gross_margin_percent / 100))) - lead.cost
+            lead.planned_revenue = lead.gross_margin + lead.cost
+            if lead.cost != 0:
+                lead.markup_percent = 100. * lead.gross_margin / lead.cost
+
