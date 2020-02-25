@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_saleorder_no_tax_document" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//thead/tr/th[5]" position="replace">
+            <t t-if="doc.hide_tax_sale_order != True">
+                <th class="text-right">Taxes</th>
+            </t>
+        </xpath>
+
+        <xpath expr="//td/span[@t-field='line.name']/../../td[5]"
+               position="replace">
+            <t t-if="doc.hide_tax_sale_order != True">
+                <td class="text-right">
+                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                </td>
+            </t>
+        </xpath>
+
+    </template>
+
+</odoo>
