@@ -56,7 +56,9 @@ class SaleOrder(models.Model):
         find_label_material = False
         find_label_service = False
         lst_order_line = []
-        lst_lump_sump = []
+        lst_lump_sum = []
+        lst_lump_sum_service = []
+        lst_lump_sum_product = []
         lst_service = []
         lst_product = []
         lst_other = []
@@ -75,7 +77,11 @@ class SaleOrder(models.Model):
         def _add_line_product(i, line, product_id):
             product = self.env['product.product'].browse(product_id)
             if product.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
-                lst_lump_sump.append([line, product, i])
+                lst_lump_sum.append([line, product, i])
+            elif product.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum_service").name:
+                lst_lump_sum_service.append([line, product, i])
+            elif product.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum_product").name:
+                lst_lump_sum_product.append([line, product, i])
             elif product.type == "service":
                 lst_service.append([line, product, i])
             elif product.type == "consu" or product.type == "product":
@@ -148,7 +154,11 @@ class SaleOrder(models.Model):
                     product_id = line[2].get("product_id")
                     _add_line_product(i, line, product_id)
                 elif order_line.product_id.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum").name:
-                    lst_lump_sump.append([line, order_line, i])
+                    lst_lump_sum.append([line, order_line, i])
+                elif order_line.product_id.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum_service").name:
+                    lst_lump_sum_service.append([line, order_line, i])
+                elif order_line.product_id.categ_id.name == self.env.ref("product_lump_sum.cat_lump_sum_product").name:
+                    lst_lump_sum_product.append([line, order_line, i])
                 elif order_line.product_id.type == "service":
                     lst_service.append([line, order_line, i])
                 elif order_line.product_id.type == "consu" or order_line.product_id.type == "product":
@@ -184,36 +194,77 @@ class SaleOrder(models.Model):
 
         # Create new list with ordered items
         # Lump sump section
-        for line in lst_lump_sump:
+        for line in lst_lump_sum:
             new_sequence_index = _add_order_line(line, new_sequence_index)
 
-        # Material section
-        if not find_label_material:
-            new_sequence_index += 1
-            dct_line_section = {"name": self.get_material_name(), "display_type": "line_section",
-                                "sequence": new_sequence_index}
-            item_line_section = [0, "virtual_112", dct_line_section]
-            lst_order_line.append(item_line_section)
-
-            # adding a note
-            if -1 in dct_note.keys():
+        has_lump_sum_product = bool(lst_lump_sum_product)
+        if not has_lump_sum_product and len(lst_product) == 1 and isinstance(lst_product[0][1],
+                                                                             type(self.env['sale.order.line'])) and \
+                lst_product[0][1].display_type == "line_section":
+            # don't show when section is alone, delete it
+            lst_product[0][1].unlink()
+        else:
+            # Material section
+            if not find_label_material and (lst_product or has_lump_sum_product):
                 new_sequence_index += 1
-                item = self._prepare_sale_order_line_sequence(dct_note[-1], new_sequence_index)
-                lst_order_line.append(item)
+                dct_line_section = {"name": self.get_material_name(), "display_type": "line_section",
+                                    "sequence": new_sequence_index}
+                item_line_section = [0, "virtual_112", dct_line_section]
+                lst_order_line.append(item_line_section)
 
-        for line in lst_product:
-            new_sequence_index = _add_order_line(line, new_sequence_index)
+                # adding a note
+                if -1 in dct_note.keys():
+                    new_sequence_index += 1
+                    item = self._prepare_sale_order_line_sequence(dct_note[-1], new_sequence_index)
+                    lst_order_line.append(item)
 
-        # Service section
-        if not find_label_service:
-            new_sequence_index += 1
-            dct_line_section = {"name": self.get_work_load_name(), "display_type": "line_section",
-                                "sequence": new_sequence_index}
-            item_line_section = [0, "virtual_113", dct_line_section]
-            lst_order_line.append(item_line_section)
+                if has_lump_sum_product:
+                    # Lump sump section product
+                    for line in lst_lump_sum_product:
+                        new_sequence_index = _add_order_line(line, new_sequence_index)
+                    has_lump_sum_product = False
 
-        for line in lst_service:
-            new_sequence_index = _add_order_line(line, new_sequence_index)
+            for line in lst_product:
+                new_sequence_index = _add_order_line(line, new_sequence_index)
+
+                # if section already exist, only one can exist.
+                if has_lump_sum_product and line[1].display_type == "line_section":
+                    # Lump sump section product
+                    for line_product in lst_lump_sum_product:
+                        new_sequence_index = _add_order_line(line_product, new_sequence_index)
+                    has_lump_sum_product = False
+
+        # Ignore this section if no item
+        has_lump_sum_service = bool(lst_lump_sum_service)
+        if not has_lump_sum_service and len(lst_service) == 1 and isinstance(lst_service[0][1],
+                                                                             type(self.env['sale.order.line'])) and \
+                lst_service[0][1].display_type == "line_section":
+            # don't show when section is alone, delete it
+            lst_service[0][1].unlink()
+        else:
+            # Service section
+            if not find_label_service and (lst_service or has_lump_sum_service):
+                new_sequence_index += 1
+                dct_line_section = {"name": self.get_work_load_name(), "display_type": "line_section",
+                                    "sequence": new_sequence_index}
+                item_line_section = [0, "virtual_113", dct_line_section]
+                lst_order_line.append(item_line_section)
+
+                if has_lump_sum_service:
+                    # Lump sump section service
+                    for line in lst_lump_sum_service:
+                        new_sequence_index = _add_order_line(line, new_sequence_index)
+                    has_lump_sum_service = False
+
+            for line in lst_service:
+                new_sequence_index = _add_order_line(line, new_sequence_index)
+
+                # if section already exist, only one can exist.
+                if has_lump_sum_service and line[1].display_type == "line_section":
+                    # Lump sump section service
+                    for line_service in lst_lump_sum_service:
+                        new_sequence_index = _add_order_line(line_service, new_sequence_index)
+                    has_lump_sum_service = False
 
         # Other section
         for line in lst_other:

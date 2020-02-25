@@ -15,7 +15,7 @@ Custom order in lines of sales and regroup
 This module adds the following section to sales: material and services.
 If enabled, it will regroup the lines under the appropriate sections.
 """,
-    'depends': ['sale', 'stock', 'product_lump_sum'],
+    'depends': ['sale', 'product_lump_sum', 'stock'],
     'data': [
         'views/sale_views.xml'
     ],
