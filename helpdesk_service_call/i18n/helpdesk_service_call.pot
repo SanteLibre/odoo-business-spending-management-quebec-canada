@@ -1,0 +1,427 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* helpdesk_service_call
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-03 04:23+0000\n"
+"PO-Revision-Date: 2020-03-03 04:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Attachment count:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Partner phone:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Severity:</b>\n"
+"                Critical\n"
+"                <br/>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Severity:</b>\n"
+"                High\n"
+"                <br/>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Severity:</b>\n"
+"                Low\n"
+"                <br/>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<b>Severity:</b>\n"
+"                Medium\n"
+"                <br/>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<br/>\n"
+"            <b>Affected system:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<br/>\n"
+"            <b>Partner address invoice:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<br/>\n"
+"            <b>Partner address:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
+msgid "<br/>\n"
+"            <b>Problem location:</b>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.ticket_view_form
+msgid "<span class=\"o_stat_text\">Orders</span>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.ticket_view_form
+msgid "<span class=\"o_stat_text\">Quotation(s)</span>"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__active
+msgid "Active"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Add Attachments"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.actions.act_window,name:helpdesk_service_call.helpdesk_ticket_affected_system_action
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__affected_system_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.view_helpdesk_affected_system_tree
+msgid "Affected System"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.ui.menu,name:helpdesk_service_call.helpdesk_ticket_affected_system_menu
+msgid "Affected Systems"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Affected system"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.view_helpdesk_ticket_affected_system_search
+msgid "Archived"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.ticket_view_form
+msgid "Automated handling"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Category"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__company_id
+msgid "Company"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__company_currency_id
+msgid "Company currency"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:22
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:22
+#: selection:helpdesk.ticket,severity:0
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+#, python-format
+msgid "Critical"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Description"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,help:helpdesk_service_call.field_helpdesk_ticket_category__sale_order_template_id
+msgid "Enables the usage of the template when the ticket is handled for the quote creation."
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Example: 4ième étage Nord-Est"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Exemple: Camera 4 doesn't work."
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.view_helpdesk_ticket_affected_system_search
+msgid "Helpdesk Affected System Search"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model,name:helpdesk_service_call.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model,name:helpdesk_service_call.model_helpdesk_ticket_affected_system
+msgid "Helpdesk Ticket Affected System"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model,name:helpdesk_service_call.model_helpdesk_ticket_category
+msgid "Helpdesk Ticket Category"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:21
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:21
+#: selection:helpdesk.ticket,severity:0
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+#, python-format
+msgid "High"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__id
+msgid "ID"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Invoice address"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Localisation"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.sale_view_ticket_inherit
+msgid "Log in the chatter from which ticket the order originates"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:19
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:19
+#: selection:helpdesk.ticket,severity:0
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+#, python-format
+msgid "Low"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:20
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:20
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+#, python-format
+msgid "Medium"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: selection:helpdesk.ticket,severity:0
+msgid "Moyen"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.ui.menu,name:helpdesk_service_call.sale_order_menu_quotations_helpdesk
+msgid "My Quotations"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_affected_system__name
+msgid "Name"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__order_number
+msgid "Number of Orders"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__order_confirmed_number
+msgid "Number of Orders confirmed"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__sale_number
+msgid "Number of Quotations"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__order_ids
+msgid "Orders"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_address
+msgid "Partner Address"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_address_invoice
+msgid "Partner Address Invoice"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_phone
+msgid "Partner Phone"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__problem_location
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Problem location"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.actions.act_window,name:helpdesk_service_call.sale_action_quotations_new
+msgid "Quotation"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.actions.act_window,name:helpdesk_service_call.sale_action_quotations
+msgid "Quotations"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Reporter"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Responsible"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model,name:helpdesk_service_call.model_sale_order
+msgid "Sale Order"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,help:helpdesk_service_call.field_helpdesk_ticket_category__sale_order_template_line_id
+msgid "Sale order template line to be filled by the ticket's description."
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.actions.act_window,name:helpdesk_service_call.sale_action_orders
+msgid "Sale orders"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.ui.menu,name:helpdesk_service_call.helpdesk_menu_sales
+msgid "Sales"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_category__sale_order_template_line_id
+msgid "Service task"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__severity
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Severity"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Short description"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.view_helpdesk_affected_system_form
+msgid "Stages"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Subject"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
+msgid "Submit Ticket"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__sale_amount_total
+msgid "Sum of Orders"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket_category__sale_order_template_id
+msgid "Template Sale Order"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:107
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:107
+#, python-format
+msgid "The category need a valid sale order template line."
+msgstr ""
+
+#. module: helpdesk_service_call
+#: code:addons/addons/odoo-business-spending-management-quebec-canada/helpdesk_service_call/models/helpdesk_ticket.py:103
+#: code:addons/helpdesk_service_call/models/helpdesk_ticket.py:103
+#, python-format
+msgid "The partner need to be filled."
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,field_description:helpdesk_service_call.field_sale_order__ticket_id
+msgid "Ticket"
+msgstr ""
+
+#. module: helpdesk_service_call
+#: model:ir.model.fields,help:helpdesk_service_call.field_helpdesk_ticket__sale_amount_total
+msgid "Untaxed Total of Confirmed Orders"
+msgstr ""
+
