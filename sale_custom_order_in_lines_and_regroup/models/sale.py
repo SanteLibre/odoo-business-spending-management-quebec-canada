@@ -3,8 +3,6 @@
 
 from odoo import _, fields, api, models
 
-cst_lump_sump = "Lump sum"
-
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -92,13 +90,15 @@ class SaleOrder(models.Model):
         def _add_order_line(line, new_sequence_index):
             index = new_sequence_index + 1
             item = self._prepare_sale_order_line_sequence(line, index)
-            lst_order_line.append(item)
+            if item:
+                lst_order_line.append(item)
 
             # adding a note
             while line[2] in dct_note.keys():
                 index += 1
                 item = self._prepare_sale_order_line_sequence(dct_note[line[2]], index)
-                lst_order_line.append(item)
+                if item:
+                    lst_order_line.append(item)
                 # good hack to support a note under a note with recursive line with note
                 if line[2] in dct_note.keys():
                     line = dct_note[line[2]]
@@ -149,7 +149,7 @@ class SaleOrder(models.Model):
                         _add_line_note(i)
                     else:
                         lst_other.append([line, order_line, i])
-                elif line[0] in [1, 6] and "product_id" in line[2]:
+                elif line[0] in (1, 6) and "product_id" in line[2]:
                     # detect if product has changed
                     product_id = line[2].get("product_id")
                     _add_line_product(i, line, product_id)
@@ -216,7 +216,8 @@ class SaleOrder(models.Model):
                 if -1 in dct_note.keys():
                     new_sequence_index += 1
                     item = self._prepare_sale_order_line_sequence(dct_note[-1], new_sequence_index)
-                    lst_order_line.append(item)
+                    if item:
+                        lst_order_line.append(item)
 
                 if has_lump_sum_product:
                     # Lump sump section product
@@ -277,7 +278,11 @@ class SaleOrder(models.Model):
         return lst_order_line
 
     def _prepare_sale_order_line_sequence(self, line, new_sequence_index):
-        if line[0][2] is False:
+        # Ignore case of 6, this will delete unused field
+        if line[0][0] == 6:
+            return False
+
+        if not line[0][2]:
             # force write value
             line[0][2] = {}
         line[0][2]["sequence"] = new_sequence_index
