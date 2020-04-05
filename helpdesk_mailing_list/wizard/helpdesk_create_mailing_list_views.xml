@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="mass_mailing_schedule_date_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.mass.mailing.view.form</field>
+        <field name="model">helpdesk.mass.mailing</field>
+        <field name="arch" type="xml">
+            <form string="Select a mailing list to add email.">
+                <group>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="email" readonly="1"/>
+                        <field name="mass_mailing_list" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Add" name="set_mailing_list" type="object" class="btn-primary"/>
+                    <button string="Discard " class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="mass_mailing_schedule_date_action" model="ir.actions.act_window">
+        <field name="name">Add email to mailing list</field>
+        <field name="res_model">helpdesk.mass.mailing</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
