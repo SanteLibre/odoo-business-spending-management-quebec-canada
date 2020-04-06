@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -17,7 +16,8 @@ If enabled, it will regroup the lines under the appropriate sections.
 """,
     'depends': ['sale', 'product_lump_sum', 'stock'],
     'data': [
-        'views/sale_views.xml'
+        'views/res_config_settings_views.xml',
+        'views/sale_views.xml',
     ],
     'installable': True,
 }
