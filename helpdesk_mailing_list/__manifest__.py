@@ -9,7 +9,6 @@
     """,
     'depends': ['mass_mailing', 'helpdesk_mgmt'],
     'data': [
-        'view/helpdesk_ticket_view.xml',
         'wizard/helpdesk_create_mailing_list_views.xml',
     ],
     'qweb': [],
