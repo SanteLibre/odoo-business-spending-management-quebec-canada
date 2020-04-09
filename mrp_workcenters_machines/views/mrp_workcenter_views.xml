@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="name"]/..' position='inside'>
+                <field name="enable_dimension" invisible="1"/>
+                <field name="workcenter_machine_type_id"/>
+                <field name="workcenter_category_id" domain="[('workcenter_machine_type_id', '=', workcenter_machine_type_id)]" attrs="{'invisible': [('workcenter_machine_type_id', '=', False)]}"
+                       options="{'no_create': True}"/>
+                <field name="dimension_inner_uom_id"
+                       attrs="{'invisible': [('enable_dimension', '=', False)], 'required': [('enable_dimension', '=', True)]}" options="{'no_create': True}"/>
+                <field name="dimension_inner_x" attrs="{'invisible': [('enable_dimension', '=', False)]}"/>
+                <field name="dimension_inner_y" attrs="{'invisible': [('enable_dimension', '=', False)]}"/>
+                <field name="dimension_inner_z" attrs="{'invisible': [('enable_dimension', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

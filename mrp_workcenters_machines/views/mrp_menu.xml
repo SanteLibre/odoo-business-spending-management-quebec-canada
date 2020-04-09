@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Actions -->
+        <record id="mrp_workcenter_category_action" model="ir.actions.act_window">
+            <field name="name">Workcenter categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.workcenter.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <record id="mrp_workcenter_machine_type_action" model="ir.actions.act_window">
+            <field name="name">Workcenter machines type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.workcenter.machine.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <!-- Menus -->
+        <menuitem id="mrp_workcenter_category_menu" name="Workcenter categories" parent="mrp.menu_mrp_configuration"
+                  action="mrp_workcenter_category_action" sequence="4"/>
+
+        <menuitem id="mrp_workcenter_machine_type_menu" name="Workcenter machines type" parent="mrp.menu_mrp_configuration"
+                  action="mrp_workcenter_machine_type_action" sequence="5"/>
+
+    </data>
+</odoo>
