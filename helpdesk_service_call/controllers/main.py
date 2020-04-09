@@ -6,6 +6,8 @@ from openerp.http import request
 import sys
 import os
 
+# Add path to support inherit helpdesk_mgmt_controllers_main.HelpdeskTicketController
+# inherit not working with http.Controller
 new_path = os.path.normpath(
     os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', '..', 'helpdesk', 'helpdesk_mgmt'))
 sys.path.append(new_path)
@@ -89,6 +91,7 @@ class HelpdeskTicketController(helpdesk_mgmt_controllers_main.HelpdeskTicketCont
             'partner_address_invoice': http.request.env['res.partner'].browse(int(kw.get("invoice_address"))).street,
             'problem_location': kw.get("problem_location"),
             'affected_system_id': kw.get("affected_system"),
+            'team_id': kw.get("team_id"),
             'severity': kw.get("severity"),
         }
         new_ticket = request.env['helpdesk.ticket'].sudo().create(vals)
