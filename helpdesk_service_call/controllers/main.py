@@ -8,8 +8,10 @@ import os
 
 # Add path to support inherit helpdesk_mgmt_controllers_main.HelpdeskTicketController
 # inherit not working with http.Controller
+# TODO fix the path when moving modules in OCA_helpdesk
 new_path = os.path.normpath(
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', '..', 'helpdesk', 'helpdesk_mgmt'))
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', '..', 'OCA_helpdesk',
+                 'helpdesk_mgmt'))
 sys.path.append(new_path)
 from controllers import main as helpdesk_mgmt_controllers_main
 
@@ -35,23 +37,31 @@ class HelpdeskTicketController(helpdesk_mgmt_controllers_main.HelpdeskTicketCont
 
         # Special case, move at the end the option "other" of affected_systems
         affected_systems = http.request.env['helpdesk.ticket.affected_system'].search(
-            [('active', '=', True), ('name', '!=', 'Other')], order="name") + http.request.env[
+            [('active', '=', True), ('name', '!=', 'Other')], order="name") + \
+                           http.request.env[
                                'helpdesk.ticket.affected_system'].search(
-            [('active', '=', True), ('name', '=', 'Other')])
+                               [('active', '=', True), ('name', '=', 'Other')])
 
-        filter_responsibles = [('active', '=', True), ('commercial_partner_id', '=', parent_id.id),
+        filter_responsibles = [('active', '=', True),
+                               ('commercial_partner_id', '=', parent_id.id),
                                ('type', '=', 'contact')]
         if parent_id.id != partner_id.id:
             filter_responsibles.append(('id', '!=', parent_id.id))
 
-        responsibles = http.request.env['res.partner'].search(filter_responsibles, order="name")
+        responsibles = http.request.env['res.partner'].search(filter_responsibles,
+                                                              order="name")
 
-        filter_localisations = [('active', '=', True), ('commercial_partner_id', '=', parent_id.id),
+        filter_localisations = [('active', '=', True),
+                                ('commercial_partner_id', '=', parent_id.id),
                                 ('type', 'in', ('other', 'delivery'))]
-        localisations = parent_id + http.request.env['res.partner'].search(filter_localisations, order="name")
+        localisations = parent_id + http.request.env['res.partner'].search(
+            filter_localisations, order="name")
 
-        filter_invoice = [('active', '=', True), ('commercial_partner_id', '=', parent_id.id), ('type', '=', 'invoice')]
-        localisations_invoice = parent_id + http.request.env['res.partner'].search(filter_invoice, order="name")
+        filter_invoice = [('active', '=', True),
+                          ('commercial_partner_id', '=', parent_id.id),
+                          ('type', '=', 'invoice')]
+        localisations_invoice = parent_id + http.request.env['res.partner'].search(
+            filter_invoice, order="name")
 
         email = http.request.env.user.email
         phone = http.request.env.user.phone if http.request.env.user.phone else http.request.env.user.mobile
@@ -85,10 +95,13 @@ class HelpdeskTicketController(helpdesk_mgmt_controllers_main.HelpdeskTicketCont
             'name': kw.get('subject'),
             'attachment_ids': False,
             'channel_id':
-                request.env['helpdesk.ticket.channel'].sudo().search([('name', '=', 'Portal')]).id,
+                request.env['helpdesk.ticket.channel'].sudo().search(
+                    [('name', '=', 'Portal')]).id,
             'partner_id': partner_id.id,
-            'partner_address': http.request.env['res.partner'].browse(int(kw.get("localisation"))).street,
-            'partner_address_invoice': http.request.env['res.partner'].browse(int(kw.get("invoice_address"))).street,
+            'partner_address': http.request.env['res.partner'].browse(
+                int(kw.get("localisation"))).street,
+            'partner_address_invoice': http.request.env['res.partner'].browse(
+                int(kw.get("invoice_address"))).street,
             'problem_location': kw.get("problem_location"),
             'affected_system_id': kw.get("affected_system"),
             'team_id': kw.get("team_id"),

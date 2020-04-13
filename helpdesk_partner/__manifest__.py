@@ -1,17 +1,16 @@
 {
-    'name': 'Helpdesk res partner team',
+    'name': 'Helpdesk partner',
     'category': 'Website',
-    'summary': 'Support res partner team',
+    'summary': 'Support more information about partner',
+    'license': 'AGPL-3',
     'version': '12.0.0.0',
     'description': """
-Helpdesk res partner team
-=========================
-Add employee
+Helpdesk partner
+================
+Support more fields of partner and add button to create res.partner.
     """,
     'depends': [
-        'helpdesk_service_call',
-        'hr',
-        'auth_signup',
+        'helpdesk_mgmt',
     ],
     'data': [
         'view/helpdesk_ticket_view.xml',
