@@ -128,3 +128,23 @@ class HelpdeskTicket(models.Model):
         tasks_ids = order.tasks_ids
         for task in tasks_ids:
             task.description = self.generate_summary_ticket()
+
+    def send_user_service_call_mail(self):
+        if self.partner_email:
+            self.env.ref('helpdesk_service_call.assignment_user_service_call_email_template'). \
+                send_mail(self.id, email_values={}, force_send=True)
+
+    def create(self, vals):
+        # if vals.get('number', '/') == '/':
+        #     seq = self.env['ir.sequence']
+        #     if 'company_id' in vals:
+        #         seq = seq.with_context(force_company=vals['company_id'])
+        #     vals['number'] = seq.next_by_code(
+        #         'helpdesk.ticket.sequence') or '/'
+        res = super().create(vals)
+
+        if res and vals.get('category_id') == self.env.ref(
+                'helpdesk_service_call.helpdesk_ticket_category_service_call').id:
+            res.send_user_service_call_mail()
+
+        return res
