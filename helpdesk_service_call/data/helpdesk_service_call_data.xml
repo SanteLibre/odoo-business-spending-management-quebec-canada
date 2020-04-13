@@ -9,6 +9,43 @@
             <field eval="True" name="active"/>
         </record>
 
+        <record id="assignment_user_service_call_email_template" model="mail.template">
+            <field name="name">Ticket confirmation</field>
+            <field name="model_id" ref="model_helpdesk_ticket"/>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">${object.partner_email}</field>
+            <field name="subject">${object.company_id.name} Ticket confirmation (Ref ${object.number or 'n/a' })
+            </field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html" type="xml">
+                <p>Hello ${object.partner_name},</p>
+                <p>The ticket ${object.number} has been created from supplier applicant. Thanks!
+                    <br>
+                    Received informations by ${object.channel}
+                    <br>
+                    Nom: ${object.partner_name}
+                    <br>
+                    Email: ${object.partner_email}
+                    <br>
+                    Phone: ${object.partner_phone}
+                    <br>
+                    Address: ${object.partner_address}
+                    <br>
+                    ${"Address invoice: " + object.partner_address_invoice.name if object.partner_address_invoice else ""}
+                    <br>
+                    ${"Description: " + object.description.name if object.description else ""}
+                    <br>
+                    ${"Actual stage: " + object.stage.name if object.stage else ""}
+                    <br>
+                    ${"Problem Location: " + object.problem_location.name if object.problem_location else ""}
+                    <br>
+                    ${"Affected system: " + object.affected_system_id.name if object.affected_system_id else ""}
+                </p>
+            </field>
+        </record>
+
         <record id="helpdesk_ticket_team_service" model="helpdesk.ticket.team">
             <field eval="&quot;Service&quot;" name="name"/>
             <field eval="&quot;1&quot;" name="active"/>

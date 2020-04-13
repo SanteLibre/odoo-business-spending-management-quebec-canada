@@ -10,6 +10,7 @@
     'depends': ['helpdesk_service_call'],
     'data': [
         'view/helpdesk_ticket_view.xml',
+        'data/helpdesk_supplier_data.xml',
     ],
     'qweb': [],
     'installable': True,

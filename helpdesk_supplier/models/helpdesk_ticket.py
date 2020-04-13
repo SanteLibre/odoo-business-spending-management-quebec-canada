@@ -27,3 +27,23 @@ class HelpdeskTicket(models.Model):
 
         partner_id = self.env['res.partner'].create(values)
         self.partner_id = partner_id.id
+
+    def send_supplier_applicant_mail(self):
+        if self.partner_email:
+            self.env.ref('helpdesk_supplier.assignment_supplier_applicant_email_template'). \
+                send_mail(self.id, email_values={}, force_send=True)
+
+    def create(self, vals):
+        # if vals.get('number', '/') == '/':
+        #     seq = self.env['ir.sequence']
+        #     if 'company_id' in vals:
+        #         seq = seq.with_context(force_company=vals['company_id'])
+        #     vals['number'] = seq.next_by_code(
+        #         'helpdesk.ticket.sequence') or '/'
+        res = super().create(vals)
+
+        if res and vals.get('category_id') == self.env.ref(
+                'helpdesk_supplier.helpdesk_ticket_category_supplier_applicant').id:
+            res.send_supplier_applicant_mail()
+
+        return res
