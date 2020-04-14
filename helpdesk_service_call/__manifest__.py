@@ -9,6 +9,7 @@
     """,
     'depends': [
         'helpdesk_mgmt',
+        'helpdesk_partner',
         'website_helpdesk',
         'sale_management'
     ],

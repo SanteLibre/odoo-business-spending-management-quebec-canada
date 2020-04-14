@@ -5,8 +5,10 @@ from odoo.exceptions import UserError
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
-    problem_location = fields.Char(string="Problem location", track_visibility='onchange')
-    affected_system_id = fields.Many2one('helpdesk.ticket.affected_system', string='Affected System',
+    problem_location = fields.Char(string="Problem location",
+                                   track_visibility='onchange')
+    affected_system_id = fields.Many2one('helpdesk.ticket.affected_system',
+                                         string='Affected System',
                                          track_visibility='onchange')
     # affected_system_other_is_visible = fields.Boolean("Affected system is visible",
     #                                                   compute="_affected_system_is_visible", readonly=True)
@@ -26,11 +28,16 @@ class HelpdeskTicket(models.Model):
         string='Company currency',
     )
 
-    sale_amount_total = fields.Monetary(compute='_compute_sale_amount_total', string="Sum of Orders",
-                                        help="Untaxed Total of Confirmed Orders", currency_field='company_currency_id')
-    sale_number = fields.Integer(compute='_compute_sale_amount_total', string="Number of Quotations")
-    order_number = fields.Integer(compute='_compute_sale_amount_total', string="Number of Orders")
-    order_confirmed_number = fields.Integer(compute='_compute_sale_amount_total', string="Number of Orders confirmed")
+    sale_amount_total = fields.Monetary(compute='_compute_sale_amount_total',
+                                        string="Sum of Orders",
+                                        help="Untaxed Total of Confirmed Orders",
+                                        currency_field='company_currency_id')
+    sale_number = fields.Integer(compute='_compute_sale_amount_total',
+                                 string="Number of Quotations")
+    order_number = fields.Integer(compute='_compute_sale_amount_total',
+                                  string="Number of Orders")
+    order_confirmed_number = fields.Integer(compute='_compute_sale_amount_total',
+                                            string="Number of Orders confirmed")
     order_ids = fields.One2many('sale.order', 'ticket_id', string='Orders')
 
     # @api.depends('affected_system_id')
@@ -74,12 +81,15 @@ class HelpdeskTicket(models.Model):
                 self.partner_address = self.partner_id.street
 
             # Check invoice address
-            lst_invoice_address = [i for i in self.partner_id.child_ids if i.type == "invoice"]
+            lst_invoice_address = [i for i in self.partner_id.child_ids if
+                                   i.type == "invoice"]
             if lst_invoice_address:
                 self.partner_address_invoice = lst_invoice_address[0].street
 
     def generate_summary_ticket(self):
-        severity_value = dict(self._fields["severity"]._description_selection(self.env)).get(self.severity)
+        severity_value = dict(
+            self._fields["severity"]._description_selection(self.env)).get(
+            self.severity)
         # TODO translate in english
         summary = """
         <b>Nom du client responsable :</b> {}<br />
@@ -91,8 +101,10 @@ class HelpdeskTicket(models.Model):
         <b>Lieu du problème :</b> {}<br />
         <b>Système affecté :</b> {}<br />
         <b>Description du problème :</b> {}
-        """.format(self.partner_name, self.partner_email, self.partner_phone, self.partner_address,
-                   severity_value, self.problem_location, self.affected_system_id.name, self.description).strip()
+        """.format(self.partner_name, self.partner_email, self.partner_phone,
+                   self.partner_address,
+                   severity_value, self.problem_location, self.affected_system_id.name,
+                   self.description).strip()
         return summary
 
     def automated_handling(self):
@@ -128,7 +140,8 @@ class HelpdeskTicket(models.Model):
 
     def send_user_service_call_mail(self):
         if self.partner_email:
-            self.env.ref('helpdesk_service_call.assignment_user_service_call_email_template'). \
+            self.env.ref(
+                'helpdesk_service_call.assignment_user_service_call_email_template'). \
                 send_mail(self.id, email_values={}, force_send=True)
 
     def create(self, vals):
