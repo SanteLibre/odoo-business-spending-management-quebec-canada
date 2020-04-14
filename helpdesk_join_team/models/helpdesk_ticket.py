@@ -12,19 +12,8 @@ class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
     is_employee = fields.Boolean(string="is_employee", default=False)
-    show_create_partner = fields.Boolean(compute="_compute_show_create_partner",
-                                         readonly=True)
     show_create_employee = fields.Boolean(compute="_compute_show_create_employee",
                                           readonly=True)
-
-    @api.multi
-    @api.depends('category_id', 'partner_id')
-    def _compute_show_create_partner(self):
-        data_category_join_team = self.env.ref(
-            'helpdesk_join_team.helpdesk_ticket_category_join_team').id
-        for val in self:
-            val.show_create_partner = data_category_join_team == val.category_id.id \
-                                      and not val.partner_id
 
     @api.multi
     @api.depends('category_id', 'partner_id', 'is_employee')
@@ -52,31 +41,6 @@ class HelpdeskTicket(models.Model):
 
         return res
 
-    def create_res_partner(self):
-        if not self.partner_name:
-            raise UserError(_('The partner name need to be filled.'))
-
-        if not self.partner_email:
-            raise UserError(_('The partner email need to be filled.'))
-
-        data_ref_category_join_team = self.env.ref(
-            'helpdesk_join_team.helpdesk_ticket_category_join_team')
-        if self.category_id.id != data_ref_category_join_team.id:
-            raise UserError(
-                _('The category need to be "%s".') % data_ref_category_join_team.name)
-
-        values = {
-            "name": self.partner_name,
-            "supplier": False,
-            "customer": False,
-            "street": self.partner_address,
-            "email": self.partner_email,
-            "phone": self.partner_phone,
-        }
-
-        partner_id = self.env['res.partner'].create(values)
-        self.partner_id = partner_id.id
-
     def create_employee(self):
         if not self.partner_id:
             raise UserError(_('The partner need to be choose.'))
@@ -84,7 +48,13 @@ class HelpdeskTicket(models.Model):
         if not self.partner_id.email:
             raise UserError(_('The partner need an email.'))
 
-        # TODO validate the user is not created and not an employee
+        # Check duplicate employee
+        res = self.env['hr.employee'].search(
+            [("work_email", "=", self.partner_id.email)])
+        if res:
+            raise UserError(_('An employee already exist with work_email "%s". '
+                              'Check employee named "%s".') %
+                            (self.partner_id.email, res[0].name))
 
         data_ref_category_join_team = self.env.ref(
             'helpdesk_join_team.helpdesk_ticket_category_join_team')

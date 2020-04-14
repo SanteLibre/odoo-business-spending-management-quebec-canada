@@ -15,12 +15,6 @@
                         attrs="{'invisible' : ['|', ('stage_id', 'in', (4, 5)), ('order_number', '>', 0)]}"/>
             </xpath>
 
-            <xpath expr="//field[@name='partner_email']" position="after">
-                <field name="partner_phone"/>
-                <field name="partner_address"/>
-                <field name="partner_address_invoice"/>
-            </xpath>
-
             <xpath expr="//field[@name='priority']" position="after">
                 <field name="severity" widget="priority"/>
             </xpath>

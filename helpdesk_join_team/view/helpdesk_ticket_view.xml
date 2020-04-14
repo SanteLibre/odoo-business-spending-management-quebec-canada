@@ -9,12 +9,6 @@
 
             <xpath expr="//button[@name='assign_to_me']" position="after">
                 <field name="show_create_employee" invisible="1"/>
-                <field name="show_create_partner" invisible="1"/>
-                <button string="Create partner"
-                        name="create_res_partner"
-                        type="object"
-                        attrs="{'invisible' : [('show_create_partner', '=', False)]}"/>
-
                 <button string="Create employee"
                         name="create_employee"
                         type="object"

@@ -18,13 +18,10 @@ class HelpdeskTicket(models.Model):
                                          readonly=True)
 
     @api.multi
-    @api.depends('category_id', 'partner_id')
+    @api.depends('partner_id')
     def _compute_show_create_partner(self):
-        data_category_join_team = self.env.ref(
-            'helpdesk_join_team.helpdesk_ticket_category_join_team').id
         for val in self:
-            val.show_create_partner = data_category_join_team == val.category_id.id \
-                                      and not val.partner_id
+            val.show_create_partner = not val.partner_id
 
     def create_res_partner(self):
         if not self.partner_name:
