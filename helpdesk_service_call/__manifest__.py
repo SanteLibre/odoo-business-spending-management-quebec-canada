@@ -7,7 +7,11 @@
     'description': """
 
     """,
-    'depends': ['website_helpdesk', 'sale_management'],
+    'depends': [
+        'helpdesk_mgmt',
+        'website_helpdesk',
+        'sale_management'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'view/sale_order_views.xml',

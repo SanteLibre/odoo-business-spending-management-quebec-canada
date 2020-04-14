@@ -5,9 +5,6 @@ from odoo.exceptions import UserError
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
-    partner_phone = fields.Char(track_visibility='onchange')
-    partner_address = fields.Char(track_visibility='onchange')
-    partner_address_invoice = fields.Char(track_visibility='onchange')
     problem_location = fields.Char(string="Problem location", track_visibility='onchange')
     affected_system_id = fields.Many2one('helpdesk.ticket.affected_system', string='Affected System',
                                          track_visibility='onchange')
