@@ -8,11 +8,11 @@
         <field name="arch" type="xml">
 
             <xpath expr="//button[@name='assign_to_me']" position="after">
-                <field name="category_id" invisible="1"/>
+                <field name="show_create_supplier" invisible="1"/>
                 <button string="Create supplier"
                         name="create_supplier"
                         type="object"
-                        attrs="{'invisible' : ['|', ('category_id', '!=', 4), ('partner_id', '!=', False)]}"/>
+                        attrs="{'invisible' : [('show_create_supplier', '=', False)]}"/>
             </xpath>
 
         </field>

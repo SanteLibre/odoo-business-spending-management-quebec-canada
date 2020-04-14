@@ -22,25 +22,25 @@
             <field name="body_html" type="xml">
                 <p>Hello ${object.partner_name},</p>
                 <p>The ticket ${object.number} has been created from supplier applicant. Thanks!
-                    <br>
+                    <br/>
                     Received informations by ${object.channel}
-                    <br>
+                    <br/>
                     Nom: ${object.partner_name}
-                    <br>
+                    <br/>
                     Email: ${object.partner_email}
-                    <br>
+                    <br/>
                     Phone: ${object.partner_phone}
-                    <br>
+                    <br/>
                     Address: ${object.partner_address}
-                    <br>
+                    <br/>
                     ${"Address invoice: " + object.partner_address_invoice.name if object.partner_address_invoice else ""}
-                    <br>
+                    <br/>
                     ${"Description: " + object.description.name if object.description else ""}
-                    <br>
+                    <br/>
                     ${"Actual stage: " + object.stage.name if object.stage else ""}
-                    <br>
+                    <br/>
                     ${"Problem Location: " + object.problem_location.name if object.problem_location else ""}
-                    <br>
+                    <br/>
                     ${"Affected system: " + object.affected_system_id.name if object.affected_system_id else ""}
                 </p>
             </field>
