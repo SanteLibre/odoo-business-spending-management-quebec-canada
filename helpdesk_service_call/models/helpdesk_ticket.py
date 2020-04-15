@@ -10,9 +10,9 @@ class HelpdeskTicket(models.Model):
     affected_system_id = fields.Many2one('helpdesk.ticket.affected_system',
                                          string='Affected System',
                                          track_visibility='onchange')
-    # affected_system_other_is_visible = fields.Boolean("Affected system is visible",
-    #                                                   compute="_affected_system_is_visible", readonly=True)
-    # affected_system_other = fields.Char(string="Affected system custom")
+
+    show_service_call = fields.Boolean(compute="_compute_show_service_call",
+                                       readonly=True)
 
     severity = fields.Selection(selection=[
         ('0', _('Low')),
@@ -40,12 +40,13 @@ class HelpdeskTicket(models.Model):
                                             string="Number of Orders confirmed")
     order_ids = fields.One2many('sale.order', 'ticket_id', string='Orders')
 
-    # @api.depends('affected_system_id')
-    # def _affected_system_is_visible(self):
-    #     for ticket in self:
-    #         if ticket.affected_system_id.id == self.env.ref(
-    #                 'helpdesk_service_call.helpdesk_ticket_affected_system_other').id:
-    #             ticket.affected_system_other_is_visible = True
+    @api.multi
+    @api.depends('category_id')
+    def _compute_show_service_call(self):
+        data_category = self.env.ref(
+            'helpdesk_service_call.helpdesk_ticket_category_service_call').id
+        for val in self:
+            val.show_service_call = data_category == val.category_id.id
 
     @api.depends('order_ids')
     def _compute_sale_amount_total(self):
@@ -124,7 +125,6 @@ class HelpdeskTicket(models.Model):
             "sale_order_template_id": self.category_id.sale_order_template_id.id
         }
         # TODO mettre les adresses de partenaires
-        # TODO Link to project task
 
         order = self.env['sale.order'].create(values)
         if order.sale_order_template_id:
@@ -133,6 +133,7 @@ class HelpdeskTicket(models.Model):
         # Force confirm SO
         order.action_confirm()
 
+        # TODO Link to project task
         # Write ticket information in created task
         tasks_ids = order.tasks_ids
         for task in tasks_ids:
@@ -144,17 +145,13 @@ class HelpdeskTicket(models.Model):
                 'helpdesk_service_call.assignment_user_service_call_email_template'). \
                 send_mail(self.id, email_values={}, force_send=True)
 
-    def create(self, vals):
-        # if vals.get('number', '/') == '/':
-        #     seq = self.env['ir.sequence']
-        #     if 'company_id' in vals:
-        #         seq = seq.with_context(force_company=vals['company_id'])
-        #     vals['number'] = seq.next_by_code(
-        #         'helpdesk.ticket.sequence') or '/'
-        res = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res_list = super(HelpdeskTicket, self).create(vals_list)
 
-        if res and vals.get('category_id') == self.env.ref(
-                'helpdesk_service_call.helpdesk_ticket_category_service_call').id:
-            res.send_user_service_call_mail()
+        for res in res_list:
+            if res.category_id.id == self.env.ref(
+                    'helpdesk_service_call.helpdesk_ticket_category_service_call').id:
+                res.send_user_service_call_mail()
 
         return res

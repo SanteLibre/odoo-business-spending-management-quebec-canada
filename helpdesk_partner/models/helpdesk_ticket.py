@@ -23,7 +23,7 @@ class HelpdeskTicket(models.Model):
         for val in self:
             val.show_create_partner = not val.partner_id
 
-    def create_res_partner(self):
+    def create_res_partner(self, is_supplier=False, is_customer=False):
         if not self.partner_name:
             raise UserError(_('The partner name need to be filled.'))
 
@@ -32,8 +32,8 @@ class HelpdeskTicket(models.Model):
 
         values = {
             "name": self.partner_name,
-            "supplier": False,
-            "customer": False,
+            "supplier": is_supplier,
+            "customer": is_customer,
             "street": self.partner_address,
             "email": self.partner_email,
             "phone": self.partner_phone,
@@ -41,3 +41,4 @@ class HelpdeskTicket(models.Model):
 
         partner_id = self.env['res.partner'].create(values)
         self.partner_id = partner_id.id
+        return partner_id

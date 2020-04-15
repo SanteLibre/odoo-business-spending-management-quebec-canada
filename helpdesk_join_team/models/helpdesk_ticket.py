@@ -8,18 +8,24 @@ from odoo.exceptions import UserError
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
-    is_employee = fields.Boolean(string="is_employee", default=False)
     show_create_employee = fields.Boolean(compute="_compute_show_create_employee",
                                           readonly=True)
 
     @api.multi
-    @api.depends('category_id', 'partner_id', 'is_employee')
+    @api.depends('category_id', 'partner_id')
     def _compute_show_create_employee(self):
         data_category_join_team = self.env.ref(
             'helpdesk_join_team.helpdesk_ticket_category_join_team').id
         for val in self:
-            val.show_create_employee = data_category_join_team == val.category_id.id \
-                                       and val.partner_id and not val.is_employee
+            if data_category_join_team != val.category_id.id:
+                val.show_create_employee = False
+            else:
+                if val.partner_id:
+                    res = self.env['hr.employee'].search(
+                        [("work_email", "=", self.partner_id.email)])
+                    val.show_create_employee = not res
+                else:
+                    val.show_create_employee = True
 
     def send_join_team_mail(self):
         if self.partner_email:
@@ -40,10 +46,7 @@ class HelpdeskTicket(models.Model):
 
     def create_employee(self):
         if not self.partner_id:
-            raise UserError(_('The partner need to be choose.'))
-
-        if not self.partner_id.email:
-            raise UserError(_('The partner need an email.'))
+            self.create_res_partner()
 
         # Check duplicate employee
         res = self.env['hr.employee'].search(
@@ -53,11 +56,11 @@ class HelpdeskTicket(models.Model):
                               'Check employee named "%s".') %
                             (self.partner_id.email, res[0].name))
 
-        data_ref_category_join_team = self.env.ref(
+        data_ref_category = self.env.ref(
             'helpdesk_join_team.helpdesk_ticket_category_join_team')
-        if self.category_id.id != data_ref_category_join_team.id:
+        if self.category_id.id != data_ref_category.id:
             raise UserError(
-                _('The category need to be "%s".') % data_ref_category_join_team.name)
+                _('The category need to be "%s".') % data_ref_category.name)
 
         # Create res.user
         company_id = self.env['res.company']._company_default_get('res.users').id
@@ -89,7 +92,6 @@ class HelpdeskTicket(models.Model):
 
         self.env['hr.employee'].create(values)
         self.partner_id.customer = False
-        self.is_employee = True
 
     @api.multi
     def _create_user(self, email):
