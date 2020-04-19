@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Renaming this action because this default name is not the correct one -->
+    <record id="action_account_fiscal_position_region_template_form" model="ir.actions.act_window">
+        <field name="name">Fiscal Position Region Templates</field>
+    </record>
+
+    <menuitem id="menu_account_fiscal_position_region_template"
+        action="action_account_fiscal_position_region_template_form"
+        parent="account_coa_menu.menu_account_coa_settings"
+        sequence="41"/>
+
+</odoo>

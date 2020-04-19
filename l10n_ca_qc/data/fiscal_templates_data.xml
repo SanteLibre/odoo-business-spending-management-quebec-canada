@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Fiscal Position Region Templates -->
+
+    <record id="fiscal_position_region_template_bsl_en" model="account.fiscal.position.region.template">
+        <field name="sequence">0</field>
+        <field name="name">Bas-Saint-Laurent</field>
+        <field name="code">01</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_slsj_en" model="account.fiscal.position.region.template">
+        <field name="sequence">1</field>
+        <field name="name">Saguenay–Lac-Saint-Jean</field>
+        <field name="code">02</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_cn_en" model="account.fiscal.position.region.template">
+        <field name="sequence">2</field>
+        <field name="name">Capitale-Nationale</field>
+        <field name="code">03</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_mauricie_en" model="account.fiscal.position.region.template">
+        <field name="sequence">3</field>
+        <field name="name">Mauricie</field>
+        <field name="code">04</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_estrie_en" model="account.fiscal.position.region.template">
+        <field name="sequence">4</field>
+        <field name="name">Estrie</field>
+        <field name="code">05</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_montreal_en" model="account.fiscal.position.region.template">
+        <field name="sequence">5</field>
+        <field name="name">Montréal</field>
+        <field name="code">06</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_outaouais_en" model="account.fiscal.position.region.template">
+        <field name="sequence">6</field>
+        <field name="name">Outaouais</field>
+        <field name="code">07</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_at_en" model="account.fiscal.position.region.template">
+        <field name="sequence">7</field>
+        <field name="name">Abitibi-Témiscamingue</field>
+        <field name="code">08</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_cn_en" model="account.fiscal.position.region.template">
+        <field name="sequence">8</field>
+        <field name="name">Côte-Nord</field>
+        <field name="code">09</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_ndq_en" model="account.fiscal.position.region.template">
+        <field name="sequence">9</field>
+        <field name="name">Nord-du-Québec</field>
+        <field name="code">10</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_gidlm_en" model="account.fiscal.position.region.template">
+        <field name="sequence">10</field>
+        <field name="name">Gaspésie–Îles-de-la-Madeleine</field>
+        <field name="code">11</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_ca_en" model="account.fiscal.position.region.template">
+        <field name="sequence">11</field>
+        <field name="name">Chaudière-Appalaches</field>
+        <field name="code">12</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_laval_en" model="account.fiscal.position.region.template">
+        <field name="sequence">12</field>
+        <field name="name">Laval</field>
+        <field name="code">13</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_lanaudiere_en" model="account.fiscal.position.region.template">
+        <field name="sequence">13</field>
+        <field name="name">Lanaudière</field>
+        <field name="code">14</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_laurentides_en" model="account.fiscal.position.region.template">
+        <field name="sequence">14</field>
+        <field name="name">Laurentides</field>
+        <field name="code">15</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_monteregie_en" model="account.fiscal.position.region.template">
+        <field name="sequence">15</field>
+        <field name="name">Montérégie</field>
+        <field name="code">16</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+    <record id="fiscal_position_region_template_cdq_en" model="account.fiscal.position.region.template">
+        <field name="sequence">16</field>
+        <field name="name">Centre-du-Québec</field>
+        <field name="code">17</field>
+        <field name="account_fiscal_position_id" ref="l10n_ca.fiscal_position_template_qc_en"/>
+    </record>
+
+</odoo>

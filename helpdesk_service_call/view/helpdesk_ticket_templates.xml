@@ -146,6 +146,20 @@
                     </div>
                 </div>
 
+                <div class="form-group form-field  form-field-many2one css_non_editable_mode_hidden" data-model-field="true" data-optional="true">
+                    <label class="control-label" for="team_id">
+                        <span>
+                            Équipe
+                        </span>
+                    </label>
+                    <select name="team_id" class="form-control o_website_form_input">
+                        <option/>
+                        <option value="1" selected="selected">
+                            Service
+                        </option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label class="col-md-3 col-sm-4 control-label" for="problem_location">Problem location</label>
                     <div class="col-md-7 col-sm-8">

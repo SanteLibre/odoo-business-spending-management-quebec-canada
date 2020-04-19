@@ -20,7 +20,7 @@ msgstr ""
 #. module: helpdesk_service_call
 #: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
 msgid "<b>Partner phone:</b>"
-msgstr "<b>Téléphone du partenaire :</b>"
+msgstr "<b>Téléphone :</b>"
 
 #. module: helpdesk_service_call
 #: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
@@ -58,7 +58,7 @@ msgid ""
 "            <b>Partner address invoice:</b>"
 msgstr ""
 "<br/>\n"
-"            <b>Adresse de facturation du partenaire :</b>"
+"            <b>Adresse de facturation :</b>"
 
 #. module: helpdesk_service_call
 #: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
@@ -67,7 +67,7 @@ msgid ""
 "            <b>Partner address:</b>"
 msgstr ""
 "<br/>\n"
-"            <b>Adresse du partenaire :</b>"
+"            <b>Adresse :</b>"
 
 #. module: helpdesk_service_call
 #: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_helpdesk_ticket_page
@@ -248,17 +248,17 @@ msgstr "Nom"
 #. module: helpdesk_service_call
 #: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_address
 msgid "Partner Address"
-msgstr "Adresse du partenaire"
+msgstr "Adresse"
 
 #. module: helpdesk_service_call
 #: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_address_invoice
 msgid "Partner Address Invoice"
-msgstr "Adresse de facturation du partenaire"
+msgstr "Adresse de facturation"
 
 #. module: helpdesk_service_call
 #: model:ir.model.fields,field_description:helpdesk_service_call.field_helpdesk_ticket__partner_phone
 msgid "Partner Phone"
-msgstr "Téléphone du partenaire"
+msgstr "Téléphone"
 
 #. module: helpdesk_service_call
 #: model_terms:ir.ui.view,arch_db:helpdesk_service_call.portal_create_ticket
