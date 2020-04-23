@@ -10,6 +10,7 @@ class HelpdeskTicket(models.Model):
 
     show_create_employee = fields.Boolean(compute="_compute_show_create_employee",
                                           readonly=True)
+    is_employee = fields.Boolean(string="is_employee", default=False)
 
     @api.multi
     @api.depends('category_id', 'partner_id')
@@ -92,6 +93,7 @@ class HelpdeskTicket(models.Model):
 
         self.env['hr.employee'].create(values)
         self.partner_id.customer = False
+        self.is_employee = True
 
     @api.multi
     def _create_user(self, email):
