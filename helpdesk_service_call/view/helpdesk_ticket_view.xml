@@ -8,12 +8,17 @@
         <field name="arch" type="xml">
 
             <xpath expr="//button[@name='assign_to_me']" position="after">
-                <field name="order_number" invisible="1"/>
                 <field name="show_service_call" invisible="1"/>
                 <button string="Automated handling"
                         name="automated_handling"
                         type="object"
-                        attrs="{'invisible' : ['|', ('stage_id', 'in', (4, 5)), ('order_number', '>', 0), ('show_service_call', '=', False)]}"/>
+                        attrs="{'invisible' : [('show_service_call', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_email']" position="after">
+                <field name="partner_phone"/>
+                <field name="partner_address"/>
+                <field name="partner_address_invoice"/>
             </xpath>
 
             <xpath expr="//field[@name='priority']" position="after">

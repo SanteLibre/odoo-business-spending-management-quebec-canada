@@ -22,6 +22,7 @@ class HelpdeskTicket(models.Model):
         if not self.partner_id:
             self.create_res_partner(is_supplier=True)
         else:
+            # Force set user is a supplier
             self.partner_id.supplier = True
 
     def send_supplier_applicant_mail(self):
